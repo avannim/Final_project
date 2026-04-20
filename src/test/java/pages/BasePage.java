@@ -12,6 +12,12 @@ public class BasePage {
     @FindBy(how = How.XPATH, using = ".//button[contains(@class, 'buttonPrimary')]")
     private SelenideElement createAdvertButton;
 
+    @FindBy(how = How.XPATH, using = ".//button[@class = 'circleSmall']")
+    private SelenideElement userProfileButton;
+
+    @FindBy(how = How.XPATH, using = ".//button[contains(@class, 'btnSmall')]")
+    private SelenideElement logoutButton;
+
     public void clickLoginButton(){
         loginButton.click();
     }
@@ -19,5 +25,9 @@ public class BasePage {
     public void clickCreateAdvertButton(){
         createAdvertButton.click();
     }
+
+    public void clickLogoutButton() { logoutButton.click(); }
+
+    public void clickUserProfileButton() { userProfileButton.click(); }
 
 }
