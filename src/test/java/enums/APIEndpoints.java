@@ -2,10 +2,12 @@ package enums;
 
 public enum APIEndpoints {
 
-    CREATE_USER("regiatration"),
-    LOGIN_USER("login"),
+    CREATE_USER("api/signup"),
+    LOGIN_USER("api/signin"),
 
-    CREATE_ADVERT("create-lisiting");
+    CREATE_ADVERT("api/create-lisiting"),
+    SEARCH_ADVERT("api/offers/1/"),
+    DELETE_ADVERT("api/listings/");
 
     private final String path;
 
