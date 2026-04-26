@@ -1,15 +1,15 @@
-package context;
+package dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import model.Token;
-import model.User;
+import model.api.AccessToken;
+import model.api.User;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Context {
+public class CreateUserResponse {
     private User user;
-    private Token token;
+    private AccessToken access_token;
 }

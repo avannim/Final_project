@@ -2,31 +2,41 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ModalWindowPage {
 
-    @FindBy(how = How.XPATH, using = ".//div[@class = 'homePage_modal__zSdUB']//input[@name = 'email']")
+    @FindBy(xpath = "//div[@class = 'homePage_modal__zSdUB']//input[@name = 'email']")
     private SelenideElement emailInput;
 
-    @FindBy(how = How.XPATH, using = ".//div[@class = 'homePage_modal__zSdUB']//input[@name = 'password']")
+    @FindBy(xpath = "//div[@class = 'homePage_modal__zSdUB']//input[@name = 'password']")
     private SelenideElement passwordInput;
 
-    @FindBy(how = How.XPATH, using = ".//div[@class = 'homePage_modal__zSdUB']//input[@name = 'submitPassword']")
+    @FindBy(xpath = "//div[@class = 'homePage_modal__zSdUB']//input[@name = 'submitPassword']")
     private SelenideElement submitPasswordInput;
 
-    @FindBy(how=How.XPATH, using = ".//div[@class = 'homePage_modal__zSdUB']//button[contains(@class,'buttonPrimary')]")
+    @FindBy(xpath = "//div[@class = 'homePage_modal__zSdUB']//button[contains(@class,'buttonPrimary')]")
     private SelenideElement submitButton;
 
-    @FindBy(how=How.XPATH, using = "//div[@class = 'homePage_modal__zSdUB']//button[contains(@class, 'buttonSecondary')]")
+    @FindBy(xpath = "//div[@class = 'homePage_modal__zSdUB']//button[contains(@class, 'buttonSecondary')]")
     private SelenideElement changeFormButton;
 
+    @FindBy(xpath = "//div[input[@name = 'email']]/ancestor::div/span")
+    private SelenideElement errorMessage;
+
+    public ModalWindowPage(){
+        page(this);
+    }
 
     public void waitToModalLoad(){
         $x("//div[@class = 'homePage_modal__zSdUB']").shouldBe(visible);
+    }
+
+    public void waitToRegisterFormLoad(){
+        $x("//div[@class = 'homePage_modal__zSdUB']//h1[text() = 'Зарегистрироваться']").shouldBe(visible);
     }
 
     public void setEmailInput(String email) {
@@ -60,5 +70,9 @@ public class ModalWindowPage {
         setPasswordInput(password);
         setSubmitPasswordInput(password);
         clicksubmitButton();
+    }
+
+    public void isErrorVisible(String errorText){
+        errorMessage.shouldHave(text(errorText));
     }
 }

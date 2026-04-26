@@ -4,6 +4,9 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.$$x;
+
 public class CreateAdvertPage extends BasePage{
 
     @FindBy(how = How.XPATH, using = ".//input[@name = 'name']")
@@ -18,5 +21,50 @@ public class CreateAdvertPage extends BasePage{
     @FindBy(how = How.XPATH, using = ".//button[@type = 'submit']")
     private SelenideElement submitButton;
 
+    @FindBy(how = How.XPATH, using = ".//div[@class = createListing_shell__A5EA7]/h1[contains(@class, 'createListing_title__IFtFs')]")
+    private SelenideElement title;
 
+    @FindBy(xpath = ".//div[input[@name='city']]/button[contains(@class, 'dropDownMenu_arrowDown__pfGL1')]")
+    private SelenideElement cityDropdownButton;
+
+    @FindBy(xpath = ".//div[input[@name='category']]/button[contains(@class, 'dropDownMenu_arrowDown__pfGL1')]")
+    private SelenideElement categoryDropdownButton;
+
+    public CreateAdvertPage(){
+        super();
+    }
+
+    public void waitToLoadPage(String value) {
+        title.shouldHave(text(value));
+    }
+
+    public void setPriceInput(Integer prise) {
+        priceInput.setValue(String.valueOf(prise));
+    }
+
+    public void clickSubmitButton() {
+        submitButton.click();
+    }
+
+    public void setDescriptionInput(String description) {
+        descriptionInput.setValue(description);
+    }
+
+    public void setTitleInput(String title){
+        titleInput.setValue(title);
+    }
+
+    public void chooseCategory(String value) {
+        categoryDropdownButton.click();
+        $$x(".//div[input[@name='category']]/parent::div//button").findBy(text(value)).click();
+    }
+
+    public void chooseCondition(String text){
+        $$x(".//input[@name = 'condition']").findBy(value(text)).click();
+    }
+
+    public void chooseCity(String value){
+        categoryDropdownButton.click();
+        $$x(".//div[input[@name='category']]/parent::div//button").findBy(text(value)).click();
+    }
 }

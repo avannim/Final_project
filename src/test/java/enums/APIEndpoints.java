@@ -5,7 +5,7 @@ public enum APIEndpoints {
     CREATE_USER("api/signup"),
     LOGIN_USER("api/signin"),
 
-    CREATE_ADVERT("api/create-lisiting"),
+    CREATE_ADVERT("api/create-listing"),
     SEARCH_ADVERT("api/offers/1/"),
     DELETE_ADVERT("api/listings/");
 

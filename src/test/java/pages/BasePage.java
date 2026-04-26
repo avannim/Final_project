@@ -1,22 +1,29 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
+
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.page;
 
 public class BasePage {
 
-    @FindBy(how = How.XPATH, using = ".//button[contains(@class, 'buttonSecondary') and not(@type='submit')]")
+    @FindBy(xpath = "//button[contains(@class, 'buttonSecondary') and not(@type='submit')]")
     private SelenideElement loginButton;
 
-    @FindBy(how = How.XPATH, using = ".//button[contains(@class, 'buttonPrimary')]")
+    @FindBy(xpath = "//button[contains(@class, 'buttonPrimary')]")
     private SelenideElement createAdvertButton;
 
-    @FindBy(how = How.XPATH, using = ".//button[@class = 'circleSmall']")
+    @FindBy(xpath = "//button[@class = 'circleSmall']")
     private SelenideElement userProfileButton;
 
-    @FindBy(how = How.XPATH, using = ".//button[contains(@class, 'btnSmall')]")
+    @FindBy(xpath = "//button[contains(@class, 'btnSmall')]")
     private SelenideElement logoutButton;
+
+    public BasePage(){
+        page(this);
+    }
 
     public void clickLoginButton(){
         loginButton.click();
@@ -29,5 +36,13 @@ public class BasePage {
     public void clickLogoutButton() { logoutButton.click(); }
 
     public void clickUserProfileButton() { userProfileButton.click(); }
+
+    public void waitingToLoadPage() {
+        createAdvertButton.shouldBe(visible);
+    }
+
+    public void isLogoutButtonVisible(){
+        logoutButton.shouldBe(Condition.visible);
+    }
 
 }
