@@ -63,7 +63,7 @@ public class HomePageSteps {
         context.getPageObjectManager().getAdvertPage().checkAdvertAttributes(context.getAdvert());
     }
 
-    @And("проверяю что создалось объявление")
+    @And("проверяю что объявление изменилось")
     public void checkEditedAdvert() throws InterruptedException {
         context.getPageObjectManager().getHomePage().searchByName(context.getAdvert().getName());
         context.getPageObjectManager().getHomePage().waitingToLoadPage();
