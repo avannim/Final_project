@@ -49,14 +49,13 @@ public class HomePageSteps {
 
     @And("ищу объявление")
     public void searchAdvert(){
-        context.getPageObjectManager().getHomePage().searchByName(context.getAdvert().getName());
-//        context.getPageObjectManager().getHomePage().searchByAllOptions(context.getAdvert());
+        context.getPageObjectManager().getHomePage().searchByAllOptions(context.getAdvert());
         context.getPageObjectManager().getHomePage().checkThereOneCard();
     }
 
     @And("проверяю что создалось объявление")
     public void checkAdvert() throws InterruptedException {
-        context.getPageObjectManager().getHomePage().searchByName(context.getAdvert().getName());
+        context.getPageObjectManager().getHomePage().searchByAllOptions(context.getAdvert());
         context.getPageObjectManager().getHomePage().waitingToLoadPage();
         context.getPageObjectManager().getHomePage().checkThereOneCard();
         context.getPageObjectManager().getHomePage().clickCard();

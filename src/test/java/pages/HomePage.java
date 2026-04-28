@@ -9,6 +9,7 @@ import com.codeborne.selenide.ElementsCollection;
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.$x;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HomePage extends BasePage{
@@ -75,13 +76,14 @@ public class HomePage extends BasePage{
     }
 
     public void chooseCategoryByName(String value){
+        System.out.println(value);
         categoryDropdownButton.click();
-        $$x(".//div[input[@name='category']]/parent::div//button").findBy(text(value)).click();
+        $x(String.format(".//div[div[input[@name='category']]]//button[span[text()='%s']]", value)).click();
     }
 
     public void chooseCityByName(String value){
         cityDropdownButton.click();
-        $$x(".//div[input[@name='city']]/parent::div//button").findBy(text(value)).click();
+        $x(String.format(".//div[div[input[@name='city']]]//button[span[text()='%s']]", value)).click();
     }
 
     public void searchByAllOptions(Advert advert){

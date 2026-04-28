@@ -22,10 +22,10 @@ public class AdvertPage extends BasePage{
     @FindBy(xpath = ".//div[@class = 'description_shell__T6J3Y listing_exDescription__pHaIQ']/p")
     private SelenideElement description;
 
-    @FindBy(xpath = "")
+    @FindBy(xpath = ".//div[@class = 'listing_adressPrice__Oct0z']/h1")
     private SelenideElement price;
 
-    @FindBy(xpath = "")
+    @FindBy(xpath = "//div[@class = 'listing_adressPrice__Oct0z']//h3[@class='subtitle']")
     private SelenideElement city;
 
     public AdvertPage(){
@@ -43,7 +43,8 @@ public class AdvertPage extends BasePage{
     public void checkAdvertAttributes(Advert advert){
         name.shouldHave(text(advert.getName()));
         description.shouldHave(text(advert.getDescription()));
-        price.shouldHave(text(String.valueOf(advert.getPrice())));
+        String priceValue = String.format("%,d ₽", advert.getPrice()).replace(',', ' ');
+        price.shouldHave(text(priceValue));
         city.shouldHave(text(advert.getCity()));
     }
 }

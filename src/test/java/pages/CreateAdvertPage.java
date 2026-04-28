@@ -6,6 +6,7 @@ import org.openqa.selenium.support.How;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class CreateAdvertPage extends BasePage{
 
@@ -21,7 +22,7 @@ public class CreateAdvertPage extends BasePage{
     @FindBy(how = How.XPATH, using = ".//button[@type = 'submit']")
     private SelenideElement submitButton;
 
-    @FindBy(how = How.XPATH, using = ".//div[@class = createListing_shell__A5EA7]/h1[contains(@class, 'createListing_title__IFtFs')]")
+    @FindBy(how = How.XPATH, using = ".//div[@class = 'createListing_shell__A5EA7']/h1[contains(@class, 'createListing_title__IFtFs')]")
     private SelenideElement title;
 
     @FindBy(xpath = ".//div[input[@name='city']]/button[contains(@class, 'dropDownMenu_arrowDown__pfGL1')]")
@@ -56,15 +57,15 @@ public class CreateAdvertPage extends BasePage{
 
     public void chooseCategory(String value) {
         categoryDropdownButton.click();
-        $$x(".//div[input[@name='category']]/parent::div//button").findBy(text(value)).click();
+        $x(String.format(".//div[div[input[@name='category']]]//button[span[text()='%s']]", value)).click();
     }
 
     public void chooseCondition(String text){
-        $$x(".//input[@name = 'condition']").findBy(value(text)).click();
+        $x(String.format(".//input[@name = 'condition' and @value='%s']/following-sibling::div", text)).click();
     }
 
     public void chooseCity(String value){
-        categoryDropdownButton.click();
-        $$x(".//div[input[@name='category']]/parent::div//button").findBy(text(value)).click();
+        cityDropdownButton.click();
+        $x(String.format(".//div[div[input[@name='city']]]//button[span[text()='%s']]", value)).click();
     }
 }
