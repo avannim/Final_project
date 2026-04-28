@@ -40,11 +40,19 @@ public class AdvertPage extends BasePage{
         deleteButton.click();
     }
 
-    public void checkAdvertAttributes(Advert advert){
-        name.shouldHave(text(advert.getName()));
-        description.shouldHave(text(advert.getDescription()));
-        String priceValue = String.format("%,d ₽", advert.getPrice()).replace(',', ' ');
-        price.shouldHave(text(priceValue));
-        city.shouldHave(text(advert.getCity()));
+    public String getAdvertName(){
+        return name.getText();
+    }
+
+    public String getAdvertDescription(){
+        return description.getText();
+    }
+
+    public String getAdvertPrice(){
+        return  price.getText();
+    }
+
+    public String getAdvertCity(){
+        return city.getText();
     }
 }

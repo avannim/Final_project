@@ -1,12 +1,14 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import lombok.Data;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
+@Data
 public class ModalWindowPage {
 
     @FindBy(xpath = "//div[@class = 'homePage_modal__zSdUB']//input[@name = 'email']")
@@ -19,7 +21,7 @@ public class ModalWindowPage {
     private SelenideElement submitPasswordInput;
 
     @FindBy(xpath = "//div[@class = 'homePage_modal__zSdUB']//button[contains(@class,'buttonPrimary')]")
-    private SelenideElement submitButton;
+    private SelenideElement submitModalButton;
 
     @FindBy(xpath = "//div[@class = 'homePage_modal__zSdUB']//button[contains(@class, 'buttonSecondary')]")
     private SelenideElement changeFormButton;
@@ -31,7 +33,11 @@ public class ModalWindowPage {
         page(this);
     }
 
-    public void waitToModalLoad(){
+    public boolean isModalWindowDisplayed(){
+        return  $x("//div[@class = 'homePage_modal__zSdUB']").isDisplayed();
+    }
+
+    public void waitToModalLoad() {
         $x("//div[@class = 'homePage_modal__zSdUB']").shouldBe(visible);
     }
 
@@ -51,8 +57,8 @@ public class ModalWindowPage {
         submitPasswordInput.setValue(password);
     }
 
-    public void clicksubmitButton(){
-        submitButton.click();
+    public void clickSubmitButton(){
+        submitModalButton.click();
     }
 
     public void clickChangeFormButton() {
@@ -62,17 +68,17 @@ public class ModalWindowPage {
     public void loginUser(String email, String password){
         setEmailInput(email);
         setPasswordInput(password);
-        clicksubmitButton();
+        clickSubmitButton();
     }
 
     public void registerUser(String email, String password){
         setEmailInput(email);
         setPasswordInput(password);
         setSubmitPasswordInput(password);
-        clicksubmitButton();
+        clickSubmitButton();
     }
 
-    public void isErrorVisible(String errorText){
-        errorMessage.shouldHave(text(errorText));
+    public String getErrorMessageText(){
+        return errorMessage.getText();
     }
 }

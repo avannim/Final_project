@@ -3,6 +3,11 @@ package steps;
 import context.TestContext;
 import io.cucumber.java.en.And;
 
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class ModalWindowSteps {
 
@@ -21,25 +26,35 @@ public class ModalWindowSteps {
     @And("вижу окно авторизации")
     public void modalWindowVisible(){
         context.getPageObjectManager().getModalWindow().waitToModalLoad();
+        assertTrue(context.getPageObjectManager().getModalWindow().isModalWindowDisplayed());
     }
 
-    @And("^регистирую пользователя( с данными уже существующего пользователя)?$")
-    public void userRegistration(String withError){
-        if (withError == null) {
-            context.setUser();
-        }
+    @And("регистирую пользователя с проверкой успеха")
+    public void userRegistration(){
+        context.setUser();
         context.getPageObjectManager().getModalWindow().registerUser(context.getUserEmail(), context.getUserPassword());
-        if (withError == null) {
-            context.getPageObjectManager().getProfilePage().isLogoutButtonVisible();
-        } else {
-            context.getPageObjectManager().getModalWindow().isErrorVisible("Ошибка");
-        }
+        context.getPageObjectManager().getHomePage().waitingToLoadPage();
+        context.getPageObjectManager().getHomePage().getLogoutButton().shouldBe(visible);
     }
 
-    @And("авторизую пользователя")
+    @And("регистирую пользователя с существующим email")
+    public void userRegistrationWithExistingEmail(){
+        context.getPageObjectManager().getModalWindow().registerUser(context.getUserEmail(), context.getUserPassword());
+        context.getPageObjectManager().getHomePage().waitingToLoadPage();
+    }
+
+    @And("вижу ошибку на форме создания")
+    public void seeErrorMessage(){
+        context.getPageObjectManager().getModalWindow().getErrorMessage().shouldBe(visible);
+        String errorText = context.getPageObjectManager().getModalWindow().getErrorMessageText();
+        assertEquals("Ошибка", errorText, "Сообщение об ошибке имеет не верный текст");
+    }
+
+    @And("авторизую пользователя с проверкой успеха")
     public void userAuthorisation(){
         context.getPageObjectManager().getModalWindow().loginUser(context.getUserEmail(), context.getUserPassword());
-        context.getPageObjectManager().getProfilePage().isLogoutButtonVisible();
+        context.getPageObjectManager().getHomePage().waitingToLoadPage();
+        context.getPageObjectManager().getHomePage().getLogoutButton().shouldBe(visible);
     }
 
 }

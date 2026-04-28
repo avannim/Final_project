@@ -48,7 +48,7 @@ public class Hooks {
     }
 
     @After("@advert")
-    public void tearDownAfterAdertTest() {
+    public void teardownAfterAvdertTest() {
         Response searchAdvert = given()
                 .spec(context.requestSpec())
                 .queryParam("name", context.getAdvert().getName() )
@@ -62,7 +62,7 @@ public class Hooks {
         response.then().statusCode(200);
     }
     @After
-    public void tearDownAll(Scenario scenario) {
+    public void teardownAll(Scenario scenario) {
         if (scenario.isFailed()) {
             String time = LocalDateTime.now()
                     .format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));

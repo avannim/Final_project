@@ -2,11 +2,13 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import lombok.Data;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
 
+@Data
 public class BasePage {
 
     @FindBy(xpath = "//button[contains(@class, 'buttonSecondary') and not(@type='submit')]")
@@ -39,10 +41,6 @@ public class BasePage {
 
     public void waitingToLoadPage() {
         createAdvertButton.shouldBe(visible);
-    }
-
-    public void isLogoutButtonVisible(){
-        logoutButton.shouldBe(Condition.visible);
     }
 
 }

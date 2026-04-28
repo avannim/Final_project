@@ -103,10 +103,11 @@ public class HomePage extends BasePage{
         card.click();
     }
 
-    public void checkThereOneCard(){
+    public int checkThereOneCard(){
         pageCount.shouldHave(text("1 из 1"));
         int count = cards.size();
-        assertEquals(1,count, "Найдено более одного объявления");
+        return count;
+
     }
 
     public void clickEditButton(){
