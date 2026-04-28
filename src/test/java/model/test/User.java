@@ -9,6 +9,7 @@ import net.datafaker.Faker;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+    private Integer id;
     private String email;
     private String password;
 

@@ -31,6 +31,7 @@ public class RestSteps {
         response.then().statusCode(201);
         CreateUserResponse userResponse = context.gson.fromJson(response.body().asString(), CreateUserResponse.class);
         context.setAccessToken(userResponse.getAccess_token().getAccess_token());
+        context.setUserId(userResponse.getUser().getId());
     }
 
     @When("создаю объявление рестом")
@@ -77,7 +78,6 @@ public class RestSteps {
                         .build())
                 .when()
                 .post(APIEndpoints.CREATE_ADVERT.getPath());
-        System.out.println(response.body().asString());
         response.then().statusCode(201);
     }
 }

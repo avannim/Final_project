@@ -64,6 +64,8 @@ public class TestContext {
         return user.getEmail();
     }
 
+    public void setUserId(Integer id){ user.setId(id); }
+
     public void setAccessToken(String token) {
         this.accessToken = new AccessToken(token);
     }

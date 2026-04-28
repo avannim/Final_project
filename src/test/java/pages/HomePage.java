@@ -89,9 +89,7 @@ public class HomePage extends BasePage{
     public void searchByAllOptions(Advert advert){
         setSearchInput(advert.getName());
         setPriceInput(String.valueOf(advert.getPrice()));
-        System.out.println("выбираю категорию " + advert.getCategory());
         chooseCategoryByName(advert.getCategory());
-        System.out.println("выбираю город " + advert.getCity());
         chooseCityByName(advert.getCity());
         clickSubmitButton();
     }

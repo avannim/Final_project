@@ -29,10 +29,11 @@ public class HomePageSteps {
         LocalStorageHelper helper = new LocalStorageHelper();
         helper.setItem("islogin", "true");
         helper.setItem("password", context.getUserPassword());
-        System.out.println(context.getAccessToken().getAccess_token());
+        System.out.println(context.gson.toJson(context.getUser()));
         helper.setItem("token", context.getAccessToken().getAccess_token());
         helper.setItem("user", context.gson.toJson(context.getUser()));
         refresh();
+        sleep(10000);
         context.getPageObjectManager().getHomePage().waitingToLoadPage();
     }
 
@@ -64,7 +65,7 @@ public class HomePageSteps {
 
     @And("проверяю что объявление изменилось")
     public void checkEditedAdvert() throws InterruptedException {
-        context.getPageObjectManager().getHomePage().searchByName(context.getAdvert().getName());
+        context.getPageObjectManager().getHomePage().searchByAllOptions(context.getAdvert());
         context.getPageObjectManager().getHomePage().waitingToLoadPage();
         context.getPageObjectManager().getHomePage().checkThereOneCard();
         context.getPageObjectManager().getHomePage().clickCard();

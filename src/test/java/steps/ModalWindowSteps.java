@@ -1,11 +1,7 @@
 package steps;
 
-import config.Config;
 import context.TestContext;
 import io.cucumber.java.en.And;
-import pages.HomePage;
-import pages.ModalWindowPage;
-import pages.ProfilePage;
 
 
 public class ModalWindowSteps {

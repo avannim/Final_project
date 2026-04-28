@@ -1,12 +1,7 @@
 package steps;
 
-import config.Config;
 import context.TestContext;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
-
-import static com.codeborne.selenide.Selenide.*;
 
 public class AdvertPageSteps {
     private final TestContext context;
@@ -29,14 +24,21 @@ public class AdvertPageSteps {
     }
 
     @And("удаляю объявление")
-    public void searchAdvert(){
+    public void deleteAdvert(){
         context.getPageObjectManager().getHomePage().clickCard();
         context.getPageObjectManager().getAdvertPage().clickDeleteButton();
         context.getPageObjectManager().getHomePage().checkCardNotExist(context.getAdvert());
     }
 
+    @And("проверяю что объявление удалено")
+    public void checkAdvertDeleted(){
+        context.getPageObjectManager().getHomePage().checkCardNotExist(context.getAdvert());
+    }
+
     @And("открываю объявление на редактирование со страницы объявления")
-    public void openAdvertonEdit(){
+    public void openAdvertOnEdit(){
+        context.getPageObjectManager().getHomePage().clickCard();
+        context.getPageObjectManager().getAdvertPage().waitingToLoadPage();
         context.getPageObjectManager().getAdvertPage().clickEditButton();
         context.getPageObjectManager().getCreateAdvertPage().waitToLoadPage("Редактировать объявление");
     }
